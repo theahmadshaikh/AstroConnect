@@ -52,10 +52,12 @@ This astrology application implements a distributed algorithm that allocates use
 - **Headers**:
   - **x-api-key**: <admin_api_key>
 - **Body:**
+  ```bash
   {
   "name": "Astrologer Name",
   "expertise": ["Expertise 1", "Expertise 2"]
   }
+  ```
 
 2. **Get All Astrologers**
 
@@ -69,8 +71,65 @@ This astrology application implements a distributed algorithm that allocates use
 - **URL**: /api/users/connect
 - **Method**: POST
 - **Headers**:
-- - **x-api-key**: <admin_api_key>
+ - **x-api-key**: <admin_api_key>
     **Body:**
+    ```bash
     {
     "userId": "<user_id>"
     }
+    ```
+4. **Set Top Astrologer Threshold**
+- **URL:** /api/flow/top-astrologers/threshold
+- **Method**: PUT
+**Headers:**
+   - **x-api-key:** <admin_api_key>
+   ```bash
+   {
+  "rating": 4.5,
+  "sessions": 50,
+  "percentage": 20
+   }
+   ```
+5. **Adjust Flow Percentage for Top Astrologers**
+- **UR:** /api/flow/top-astrologers/percentage
+- **Method**: PUT
+- **Headers:**
+   - **x-api-key:** <admin_api_key>
+   ```bash
+   {
+  "percentage": 20,
+  "rating": 4.5,
+  "sessions": 10
+   }
+   ```
+## Usage Examples:
+
+1. **Creating a New Astrologer:**
+   ```bash
+   curl -X POST http://localhost:3000/api/astrologers \
+   -H "x-api-key: <your_api_key>" \
+   -H "Content-Type: application/json" \
+   -d '{"name": "John Doe", "expertise": ["Horoscope", "Palmistry"]}'
+   ```
+2. **Connecting a User to an Astrologer:**
+   ```bash
+   curl -X POST http://localhost:3000/api/users/connect \
+   -H "x-api-key: <your_api_key>" \
+   -H "Content-Type: application/json" \
+   -d '{"userId": "<user_id>"}'
+   ```
+3. **Setting Top Astrologer Threshold:**
+   ```bash
+      curl -X PUT http://localhost:3000/api/flow/top-astrologers/threshold \
+   -H "x-api-key: <your_api_key>" \
+   -H "Content-Type: application/json" \
+   -d '{"rating": 4.5, "sessions": 50, "percentage": 20}'
+   ```
+4. **Adjusting Flow Percentage for Top Astrologers:**
+   ```bash
+   curl -X PUT http://localhost:3000/api/flow/top-astrologers/percentage \
+   -H "x-api-key: <your_api_key>" \
+   -H "Content-Type: application/json" \
+   -d '{"percentage": 20, "rating": 4.5, "sessions": 10}'
+
+   ```
